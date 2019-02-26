@@ -1,8 +1,7 @@
-require "yclients/api/version"
+require 'net/http'
+require 'json'
 
-module Yclients
-  module Api
-    class Error < StandardError; end
-    # Your code goes here...
-  end
-end
+require 'yclients/api/exception'
+require 'yclients/api/urls'
+require "yclients/api/client"
+require "yclients/api/version"
