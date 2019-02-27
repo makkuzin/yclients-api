@@ -4,7 +4,8 @@
 /coverage/
 /doc/
 /pkg/
-/spec/reports/
+/spec/vcr/*
+!/spec/vcr/client_credentials.rb.example
 /tmp/
 
 # rspec failure tracking

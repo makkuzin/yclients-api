@@ -1,5 +1,11 @@
 require "bundler/setup"
 require "yclients/api"
+require 'vcr'
+begin
+  require 'vcr/client_credentials'
+rescue LoadError
+  abort("Please, create spec/vcr/client_credentials.rb with real data") 
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -11,4 +17,11 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/vcr'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+# config.default_cassette_options = { record: :all }
 end
