@@ -1,10 +1,5 @@
 RSpec.describe Yclients::Api::Companies, :vcr do
-  let(:client) do
-    Yclients::Api::Client.new partner_token: CLIENT_CREDENTIALS[:partner_token],
-      user_token: CLIENT_CREDENTIALS[:user_token],
-      login: CLIENT_CREDENTIALS[:login],
-      password: CLIENT_CREDENTIALS[:password]
-  end
+  let(:client) { Yclients::Api::Client.new CLIENT_CREDENTIALS }
 
   describe '#companies' do
     it 'user_token is not required' do
@@ -12,6 +7,10 @@ RSpec.describe Yclients::Api::Companies, :vcr do
       result = client.companies
       expect(result.class).to eq(Array)
       expect(result.first.class).to eq(Hash)
+    end
+
+    it 'get `my` companies' do
+      expect(client.companies(my: true).class).to eq(Array)
     end
 
     it 'user_token is required with `my` param' do

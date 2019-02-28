@@ -43,5 +43,19 @@ module Yclients::Api
       end
     end
 
+    def headers(args={auth: false})
+      if args[:auth]
+        {
+          'Authorization' => "Bearer #{@partner_token}, User #{@user_token}",
+          "Content-Type" => 'application/json'
+        }
+      else
+        {
+          'Authorization' => "Bearer #{@partner_token}",
+          "Content-Type" => 'application/json'
+        }
+      end
+    end
+
   end
 end

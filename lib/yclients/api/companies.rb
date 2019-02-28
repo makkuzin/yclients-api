@@ -30,10 +30,10 @@ module Yclients::Api
 #     params.merge!(query_param(:coordinate_lon, args[:coordinate_lon], :string)) if args.key?(:coordinate_lon)
       uri.query = URI.encode_www_form(params)
 
-      req = Net::HTTP::Get.new(uri, {
-        'Authorization' => "Bearer #{@partner_token}",
-        "Content-Type" => 'application/json'
-      })
+      req = Net::HTTP::Get.new(uri, headers({
+        auth: args.key?(:my) && [true, false].include?(args[:my])
+      }))
+
       res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
         http.request(req)
       end

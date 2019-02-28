@@ -1,10 +1,5 @@
 RSpec.describe Yclients::Api::Auth, :vcr do
-  let(:client) do
-    Yclients::Api::Client.new partner_token: CLIENT_CREDENTIALS[:partner_token],
-      user_token: CLIENT_CREDENTIALS[:user_token],
-      login: CLIENT_CREDENTIALS[:login],
-      password: CLIENT_CREDENTIALS[:password]
-  end
+  let(:client) { Yclients::Api::Client.new CLIENT_CREDENTIALS }
 
   describe '#auth' do
     it 'reject POST request when user token is set' do

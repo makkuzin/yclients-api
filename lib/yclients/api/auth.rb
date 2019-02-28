@@ -14,10 +14,7 @@ module Yclients::Api
       end
 
       uri = URI(URL)
-      req = Net::HTTP::Post.new(uri, {
-        'Authorization' => "Bearer #{@partner_token}",
-        "Content-Type" => 'application/json'
-      })
+      req = Net::HTTP::Post.new(uri, headers)
 
       req.body = { "login" => @login, "password" => @password }.to_json
 
