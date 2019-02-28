@@ -2,9 +2,9 @@ require "bundler/setup"
 require "yclients/api"
 require 'vcr'
 begin
-  require 'vcr/client_credentials'
+  require 'support/client_credentials'
 rescue LoadError
-  abort("Please, create spec/vcr/client_credentials.rb with real data") 
+  abort("Please, create spec/support/client_credentials.rb with real data") 
 end
 
 RSpec.configure do |config|

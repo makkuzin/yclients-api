@@ -5,7 +5,7 @@
 /doc/
 /pkg/
 /spec/vcr/*
-!/spec/vcr/client_credentials.rb.example
+/spec/support/client_credentials.rb
 /tmp/
 
 # rspec failure tracking
