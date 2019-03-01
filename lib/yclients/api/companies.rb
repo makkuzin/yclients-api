@@ -42,9 +42,36 @@ module Yclients::Api
       if json.kind_of?(Array)
         json
       else
-        raise AuthError, json.to_s
+        raise CompaniesAccessError, json.to_s
       end
     end
 
+    # for_booking (Number, 1): Если нужно получить поле next_slot по каждой компании
+    # show_groups (Number, 1): Включить в обьект компании список сетей в которые входит эта компания
+    def company(id, args={})
+      uri = URI("#{URL1}/#{id}/")
+      params = {}
+      params.merge!(query_param(:forBooking, args[:for_booking], :boolean)) if args.key?(:for_booking)
+      params.merge!(query_param(:show_groups, args[:show_groups], :boolean)) if args.key?(:show_groups)
+      uri.query = URI.encode_www_form(params)
+
+      req = Net::HTTP::Get.new(uri, headers({ auth: false }))
+
+      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+        http.request(req)
+      end
+
+      json = JSON.parse(res.body)
+      if json.kind_of?(Hash) && json.key?('id')
+        json
+      else
+        raise CompaniesAccessError, json.to_s
+      end
+    end
+
+=begin TODO
+    def edit_company(id, args={}); end
+    def delete_company(id); end
+=end
   end
 end

@@ -6,4 +6,5 @@ module Yclients::Api
   end
 
   class AuthError < Exception; end
+  class CompaniesAccessError < Exception; end
 end
