@@ -70,6 +70,7 @@ module Yclients::Api
     end
 
 =begin TODO
+    def new_company(args={}); end
     def edit_company(id, args={}); end
     def delete_company(id); end
 =end
