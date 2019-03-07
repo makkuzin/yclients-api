@@ -3,6 +3,7 @@ module Yclients::Api
     include Auth
     include Companies
     include ServiceCategories
+    include Services
 
     attr_accessor :partner_token, :user_token, :login, :password
 
